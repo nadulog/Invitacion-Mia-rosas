@@ -124,7 +124,7 @@ if (scratchCard && scratchCanvas) {
     scratchContext.strokeRect(10, 10, rect.width - 20, rect.height - 20);
 
     const titleSize = Math.max(15, Math.min(28, rect.width * .055));
-    const smallSize = Math.max(10, Math.min(17, rect.width * .034));
+    const smallSize = Math.max(13, Math.min(22, rect.width * .042));
     scratchContext.textAlign = 'center';
     scratchContext.textBaseline = 'middle';
     scratchContext.fillStyle = '#ffe7ae';
@@ -133,11 +133,27 @@ if (scratchCard && scratchCanvas) {
     scratchContext.font = `600 ${titleSize}px Montserrat, Arial, sans-serif`;
     scratchContext.fillText('DESLIZÁ EL DEDO', rect.width / 2, rect.height * .42);
     scratchContext.fillText('Y DESCUBRÍ LA FECHA', rect.width / 2, rect.height * .53);
-    scratchContext.font = `400 ${smallSize}px Montserrat, Arial, sans-serif`;
-    scratchContext.letterSpacing = '2px';
-    scratchContext.fillStyle = '#fff8fa';
-    scratchContext.fillText('RASPÁ AQUÍ', rect.width / 2, rect.height * .66);
+    // "RASPÁ AQUÍ" en una etiqueta dorada para que se lea sobre el rosa claro
+    scratchContext.font = `700 ${smallSize}px Montserrat, Arial, sans-serif`;
+    scratchContext.letterSpacing = '3px';
+    const labelY = rect.height * .66;
+    const labelWidth = scratchContext.measureText('RASPÁ AQUÍ').width + smallSize * 2.4;
+    const labelHeight = smallSize * 2.3;
+    const labelGradient = scratchContext.createLinearGradient(0, labelY - labelHeight / 2, 0, labelY + labelHeight / 2);
+    labelGradient.addColorStop(0, '#f6e1a6');
+    labelGradient.addColorStop(.5, '#dcb766');
+    labelGradient.addColorStop(1, '#b98a3c');
+    scratchContext.shadowColor = 'rgba(99,34,58,.35)';
+    scratchContext.shadowBlur = 8;
+    scratchContext.shadowOffsetY = 2;
+    scratchContext.fillStyle = labelGradient;
+    scratchContext.beginPath();
+    scratchContext.roundRect(rect.width / 2 - labelWidth / 2, labelY - labelHeight / 2, labelWidth, labelHeight, labelHeight / 2);
+    scratchContext.fill();
     scratchContext.shadowBlur = 0;
+    scratchContext.shadowOffsetY = 0;
+    scratchContext.fillStyle = '#6e2440';
+    scratchContext.fillText('RASPÁ AQUÍ', rect.width / 2 + 1.5, labelY + 1);
   }
 
   function scratchAt(event) {
@@ -228,6 +244,31 @@ if (scratchCard && scratchCanvas) {
 
   drawScratchSurface();
   new ResizeObserver(drawScratchSurface).observe(scratchCard);
+
+  // No se puede seguir bajando hasta raspar la tarjeta (hacia arriba sí)
+  const scratchSection = scratchCard.closest('section');
+  const scrollLimit = () => window.scrollY + scratchSection.getBoundingClientRect().bottom - window.innerHeight;
+  const atLimit = () => !completed && window.scrollY >= scrollLimit() - 1;
+  let touchStartY = 0;
+
+  window.addEventListener('scroll', () => {
+    if (completed) return;
+    const limit = scrollLimit();
+    if (window.scrollY > limit) window.scrollTo({ top: limit, behavior: 'instant' });
+  }, { passive: true });
+
+  window.addEventListener('wheel', (event) => {
+    if (event.deltaY > 0 && atLimit()) event.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('touchstart', (event) => {
+    touchStartY = event.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (event) => {
+    const movingDown = event.touches[0].clientY < touchStartY;
+    if (movingDown && atLimit()) event.preventDefault();
+  }, { passive: false });
 }
 
 document.querySelectorAll('[data-open]').forEach((button) => {
@@ -364,4 +405,17 @@ if (invitationAudio && audioToggle) {
 
   invitationAudio.addEventListener('pause', () => updateAudioButton(false));
   invitationAudio.addEventListener('play', () => updateAudioButton(true));
+
+  // La música arranca sola. Si el navegador bloquea el sonido hasta que la
+  // persona toque la pantalla, arranca con el primer toque.
+  const unlockEvents = ['pointerup', 'touchend', 'click', 'keydown'];
+  const removeUnlock = () => unlockEvents.forEach((type) => document.removeEventListener(type, startOnFirstTouch, true));
+  function startOnFirstTouch(event) {
+    if (audioToggle.contains(event.target)) return; // el botón ya maneja su propio clic
+    invitationAudio.play().catch(() => {});
+  }
+
+  invitationAudio.addEventListener('play', removeUnlock);
+  unlockEvents.forEach((type) => document.addEventListener(type, startOnFirstTouch, true));
+  invitationAudio.play().catch(() => {});
 }
