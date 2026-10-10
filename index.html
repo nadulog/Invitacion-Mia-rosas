@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eaa0b1">
+  <meta name="description" content="Invitación a los XV de Mia — 13 de noviembre de 2026">
+  <title>Mis XV Mia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <section class="sheet" aria-label="Portada de la invitación">
+      <img src="assets/portada.png" alt="" width="941" height="1672">
+      <h1 class="overlay cover-name gold-text" data-text="Mia">Mia</h1>
+    </section>
+
+    <section class="sheet photo-sheet" aria-label="Foto de Mia">
+      <img src="assets/foto-mia.jpg" alt="Mia sonriendo frente a un 15 de luces" width="734" height="1096">
+    </section>
+
+    <section class="sheet countdown-sheet" aria-labelledby="countdown-title">
+      <img src="assets/cuenta-regresiva-limpia.png" alt="Flores rosas sobre un fondo satinado" width="941" height="1672">
+      <div class="petal-rain" id="petalRain" aria-hidden="true"></div>
+      <h2 id="countdown-title" class="sr-only">Cuenta regresiva para los XV de Mia</h2>
+      <div class="countdown" aria-live="polite" aria-atomic="true">
+        <span id="days">00</span><span id="hours">00</span><span id="minutes">00</span><span id="seconds">00</span>
+      </div>
+    </section>
+
+    <section class="sheet scratch-section" aria-label="Fecha y hora">
+      <img src="assets/fecha.png" alt="" width="941" height="1672">
+      <div class="overlay date-block">
+        <p class="light-text date-weekday">VIERNES</p>
+        <p class="gold-text date-day" data-text="13">13</p>
+        <p class="light-text date-month">NOVIEMBRE 2026</p>
+        <span class="date-rule" aria-hidden="true"></span>
+        <p class="light-text date-time">21:30 A 05:30 HS</p>
+      </div>
+      <div class="scratch-card" id="scratchCard">
+        <canvas id="scratchCanvas" tabindex="0" role="button" aria-label="Deslizá el dedo para descubrir la fecha"></canvas>
+        <span class="sr-only">Deslizá el dedo por la tarjeta para descubrir la fecha. También podés presionar Enter.</span>
+      </div>
+      <div class="scratch-celebration" id="scratchCelebration" aria-hidden="true"></div>
+      <button class="hotspot calendar-hotspot" id="calendarButton" aria-label="Agregar la fiesta al calendario"></button>
+    </section>
+
+    <section class="sheet" aria-label="Cómo llegar">
+      <img src="assets/ubicacion.png" alt="Cómo llegar" width="941" height="1672">
+      <div class="overlay place-block">
+        <p class="gold-text place-name" data-text="JANO'S BOUTIQUE&#10;LOMAS">JANO'S BOUTIQUE<br>LOMAS</p>
+        <p class="light-text place-address">José Ignacio Gorriti 950<br>Lomas de Zamora</p>
+      </div>
+      <button class="hotspot location-hotspot" data-open="locationDialog" aria-label="Ver opciones para llegar"></button>
+    </section>
+
+    <section class="sheet dress-section" aria-label="Código de vestimenta">
+      <img src="assets/dress-code.png" alt="Dress code" width="941" height="1672">
+      <div class="overlay dress-block">
+        <p class="gold-text dress-name" data-text="ELEGANTE SPORT">ELEGANTE SPORT</p>
+        <p class="light-text dress-note">Se reserva el color rosa</p>
+      </div>
+    </section>
+
+    <section class="sheet gift-section" aria-label="Regalos">
+      <img src="assets/regalos.png" alt="Tu presencia es mi mejor regalo. Si querés hacerme un presente, podés ver los datos" width="941" height="1672">
+      <button class="hotspot gift-hotspot" data-open="giftDialog" aria-label="Ver datos para regalos"></button>
+    </section>
+
+    <section class="sheet gallery-section" aria-labelledby="galleryTitle">
+      <div class="gallery-heading">
+        <p>UN PEDACITO DE MÍ</p>
+        <h2 id="galleryTitle">GALERÍA</h2>
+        <span>Momentos para recordar</span>
+      </div>
+      <div class="gallery__grid">
+        <button class="gallery__item" type="button" data-gallery-index="0"><img src="assets/galeria-1.jpg" alt="Foto 1 del book de XV de Mia"></button>
+        <button class="gallery__item" type="button" data-gallery-index="1"><img src="assets/galeria-2.jpg" alt="Foto 2 del book de XV de Mia" loading="lazy"></button>
+        <button class="gallery__item" type="button" data-gallery-index="2"><img src="assets/galeria-3.jpg" alt="Foto 3 del book de XV de Mia" loading="lazy"></button>
+        <button class="gallery__item" type="button" data-gallery-index="3"><img src="assets/galeria-4.jpg" alt="Foto 4 del book de XV de Mia" loading="lazy"></button>
+        <button class="gallery__item" type="button" data-gallery-index="4"><img src="assets/galeria-5.jpg" alt="Foto 5 del book de XV de Mia" loading="lazy"></button>
+        <button class="gallery__item" type="button" data-gallery-index="5"><img src="assets/galeria-6.jpg" alt="Foto 6 del book de XV de Mia" loading="lazy"></button>
+        <button class="gallery__item gallery__item--wide" type="button" data-gallery-index="6"><img src="assets/galeria-7.jpg" alt="Foto 7 del book de XV de Mia" loading="lazy"></button>
+        <button class="gallery__item" type="button" data-gallery-index="7"><img src="assets/galeria-8.jpg" alt="Foto 8 del book de XV de Mia" loading="lazy"></button>
+        <button class="gallery__item gallery__item--wide" type="button" data-gallery-index="8"><img src="assets/galeria-9.jpg" alt="Foto 9 del book de XV de Mia" loading="lazy"></button>
+        <button class="gallery__item" type="button" data-gallery-index="9"><img src="assets/galeria-10.jpg" alt="Foto 10 del book de XV de Mia" loading="lazy"></button>
+        <button class="gallery__item" type="button" data-gallery-index="10"><img src="assets/galeria-11.jpg" alt="Foto 11 del book de XV de Mia" loading="lazy"></button>
+      </div>
+    </section>
+
+    <section class="sheet" aria-label="Bloomkeep">
+      <img src="assets/bloomkeep.png" alt="Bloomkeep, la red social de mis XV. Compartí fotos, mensajes y recuerdos" width="941" height="1672">
+      <a class="hotspot bloom-hotspot" href="https://app.bloomkeep.site/miaa-15" target="_blank" rel="noopener" aria-label="Ingresar a Bloomkeep"></a>
+    </section>
+
+    <section class="sheet music-sheet" aria-label="Música">
+      <img src="assets/musica.png" alt="Música. Sumá esa canción que no puede faltar" width="941" height="1672">
+      <div class="vinyl-effect" aria-hidden="true"></div>
+      <button class="hotspot music-hotspot" data-open="musicDialog" aria-label="Agregar una canción"></button>
+    </section>
+
+    <section class="sheet" aria-label="Confirmación de asistencia">
+      <img src="assets/confirmacion.png" alt="Confirmá tu asistencia" width="941" height="1672">
+      <p class="overlay light-text rsvp-deadline">Tenés tiempo hasta<br>el 20 de octubre</p>
+      <button class="hotspot rsvp-hotspot" data-open="rsvpDialog" aria-label="Confirmar asistencia"></button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="assets/footer.png" alt="Hecho con amor por BloomDate. Todos los derechos reservados" width="2048" height="683">
+    <div class="footer-links" aria-label="Enlaces de BloomDate">
+      <a href="https://wa.me/" target="_blank" rel="noopener" aria-label="WhatsApp de BloomDate"></a>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram de BloomDate"></a>
+      <a href="#" aria-label="Sitio web de BloomDate"></a>
+    </div>
+  </footer>
+
+  <dialog id="locationDialog" class="modal">
+    <button class="modal-close" data-close aria-label="Cerrar">×</button>
+    <p class="eyebrow">¿CÓMO QUERÉS LLEGAR?</p>
+    <h2>JANO'S BOUTIQUE LOMAS</h2>
+    <p>José Ignacio Gorriti 950<br>Lomas de Zamora, Buenos Aires</p>
+    <div class="modal-actions">
+      <a class="gold-button" href="https://maps.app.goo.gl/jARMJWw9pM4WA83VA" target="_blank" rel="noopener">GOOGLE MAPS</a>
+      <a class="gold-button" href="https://www.waze.com/ul?q=Jos%C3%A9%20Ignacio%20Gorriti%20950%2C%20Lomas%20de%20Zamora&navigate=yes" target="_blank" rel="noopener">WAZE</a>
+      <button class="outline-button" id="copyAddress">COPIAR DIRECCIÓN</button>
+    </div>
+    <p class="status" id="copyStatus" role="status"></p>
+  </dialog>
+
+  <dialog id="giftDialog" class="modal">
+    <button class="modal-close" data-close aria-label="Cerrar">×</button>
+    <p class="eyebrow">REGALOS</p>
+    <h2>GRACIAS POR ACOMPAÑARME</h2>
+    <p>Si querés hacerme un presente, podés usar estos datos:</p>
+    <div class="data-card">
+      <small>ALIAS</small>
+      <strong id="giftAlias">valen.mia.15mp</strong>
+      <small>TITULAR</small>
+      <strong>Mía Valentina Zarco</strong>
+      <small>BANCO</small>
+      <strong>Mercado Pago</strong>
+    </div>
+    <button class="gold-button" id="copyGift">COPIAR ALIAS</button>
+    <p class="status" id="giftStatus" role="status"></p>
+  </dialog>
+
+  <dialog id="musicDialog" class="modal">
+    <button class="modal-close" data-close aria-label="Cerrar">×</button>
+    <p class="eyebrow">MÚSICA</p>
+    <h2>¿QUÉ CANCIÓN NO PUEDE FALTAR?</h2>
+    <form id="musicForm">
+      <label>Tu nombre<input name="name" autocomplete="name" required></label>
+      <label>Canción y artista<input name="song" required></label>
+      <button class="gold-button" type="submit">ENVIAR POR WHATSAPP</button>
+    </form>
+  </dialog>
+
+  <dialog id="rsvpDialog" class="modal">
+    <button class="modal-close" data-close aria-label="Cerrar">×</button>
+    <p class="eyebrow">CONFIRMACIÓN</p>
+    <h2>¡TE ESPERO!</h2>
+    <p>Confirmá tu asistencia antes del 20 de octubre.</p>
+    <form id="rsvpForm">
+      <label>Nombre y apellido<input name="name" autocomplete="name" required></label>
+      <label>¿Vas a asistir?
+        <select name="attendance" required>
+          <option value="">Elegí una opción</option>
+          <option value="Sí, voy a asistir">Sí, voy a asistir</option>
+          <option value="No podré asistir">No podré asistir</option>
+        </select>
+      </label>
+      <label>Mensaje (opcional)<textarea name="message" rows="3"></textarea></label>
+      <button class="gold-button" type="submit">CONFIRMAR POR WHATSAPP</button>
+    </form>
+  </dialog>
+
+  <dialog class="lightbox" aria-label="Galería de fotos">
+    <button class="lightbox__close" type="button" aria-label="Cerrar galería">×</button>
+    <button class="lightbox__nav lightbox__nav--previous" type="button" aria-label="Foto anterior">‹</button>
+    <img class="lightbox__image" alt="">
+    <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Foto siguiente">›</button>
+  </dialog>
+
+  <button class="audio-toggle" id="audioToggle" type="button"
+    aria-label="Reproducir música" title="Reproducir música" aria-pressed="false">
+    <span class="audio-toggle__icon" aria-hidden="true">♫</span>
+    <small>MÚSICA</small>
+  </button>
+  <audio id="invitationAudio" preload="metadata" loop>
+    <source src="assets/musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
