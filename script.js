@@ -320,19 +320,6 @@ function openWhatsApp(lines) {
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener');
 }
 
-document.querySelector('#musicForm').addEventListener('submit', (event) => {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const data = Object.fromEntries(new FormData(form));
-  openWhatsApp([
-    '¡Hola! Te sugiero una canción para los XV de Mia 🎶',
-    `Canción: ${data.song}`,
-    `De: ${data.name}`
-  ]);
-  form.reset();
-  form.closest('dialog').close();
-});
-
 document.querySelector('#rsvpForm').addEventListener('submit', (event) => {
   event.preventDefault();
   const form = event.currentTarget;

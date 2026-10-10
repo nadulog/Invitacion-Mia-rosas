@@ -108,7 +108,7 @@
     <section class="sheet music-sheet" aria-label="Música">
       <img src="assets/musica.png" alt="Música. Sumá esa canción que no puede faltar" width="941" height="1672">
       <div class="vinyl-effect" aria-hidden="true"></div>
-      <button class="hotspot music-hotspot" data-open="musicDialog" aria-label="Agregar una canción"></button>
+      <a class="hotspot music-hotspot" href="https://open.spotify.com/playlist/4s0TDq5Q9nCpxkF8g284qJ" target="_blank" rel="noopener" aria-label="Agregar canción a la playlist en Spotify"></a>
     </section>
 
     <section class="sheet" aria-label="Confirmación de asistencia">
@@ -155,17 +155,6 @@
     </div>
     <button class="gold-button" id="copyGift">COPIAR ALIAS</button>
     <p class="status" id="giftStatus" role="status"></p>
-  </dialog>
-
-  <dialog id="musicDialog" class="modal">
-    <button class="modal-close" data-close aria-label="Cerrar">×</button>
-    <p class="eyebrow">MÚSICA</p>
-    <h2>¿QUÉ CANCIÓN NO PUEDE FALTAR?</h2>
-    <form id="musicForm">
-      <label>Tu nombre<input name="name" autocomplete="name" required></label>
-      <label>Canción y artista<input name="song" required></label>
-      <button class="gold-button" type="submit">ENVIAR POR WHATSAPP</button>
-    </form>
   </dialog>
 
   <dialog id="rsvpDialog" class="modal">
