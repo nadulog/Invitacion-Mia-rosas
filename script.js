@@ -143,15 +143,21 @@ if (scratchCard && scratchCanvas) {
     labelGradient.addColorStop(0, '#f6e1a6');
     labelGradient.addColorStop(.5, '#dcb766');
     labelGradient.addColorStop(1, '#b98a3c');
-    scratchContext.shadowColor = 'rgba(99,34,58,.35)';
+    const labelX = rect.width / 2 - labelWidth / 2;
+    const labelTop = labelY - labelHeight / 2;
+    scratchContext.shadowColor = 'rgba(99,34,58,.4)';
     scratchContext.shadowBlur = 8;
-    scratchContext.shadowOffsetY = 2;
+    scratchContext.shadowOffsetY = 3;
     scratchContext.fillStyle = labelGradient;
-    scratchContext.beginPath();
-    scratchContext.roundRect(rect.width / 2 - labelWidth / 2, labelY - labelHeight / 2, labelWidth, labelHeight, labelHeight / 2);
-    scratchContext.fill();
+    scratchContext.fillRect(labelX, labelTop, labelWidth, labelHeight);
     scratchContext.shadowBlur = 0;
     scratchContext.shadowOffsetY = 0;
+    scratchContext.strokeStyle = '#fff1c7';
+    scratchContext.lineWidth = 1.5;
+    scratchContext.strokeRect(labelX + .75, labelTop + .75, labelWidth - 1.5, labelHeight - 1.5);
+    scratchContext.strokeStyle = '#8f6428';
+    scratchContext.lineWidth = 1;
+    scratchContext.strokeRect(labelX - .5, labelTop - .5, labelWidth + 1, labelHeight + 1);
     scratchContext.fillStyle = '#6e2440';
     scratchContext.fillText('RASPÁ AQUÍ', rect.width / 2 + 1.5, labelY + 1);
   }
@@ -413,6 +419,19 @@ if (invitationAudio && audioToggle) {
   function startOnFirstTouch(event) {
     if (audioToggle.contains(event.target)) return; // el botón ya maneja su propio clic
     invitationAudio.play().catch(() => {});
+  }
+
+  // Pantalla de entrada: el toque en "Abrir invitación" garantiza la música
+  const intro = document.querySelector('#intro');
+  const introButton = document.querySelector('#introButton');
+  if (intro && introButton) {
+    introButton.addEventListener('click', () => {
+      invitationAudio.play().catch(() => {});
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.body.classList.remove('intro-open');
+      intro.classList.add('is-hidden');
+      setTimeout(() => intro.remove(), 900);
+    });
   }
 
   invitationAudio.addEventListener('play', removeUnlock);

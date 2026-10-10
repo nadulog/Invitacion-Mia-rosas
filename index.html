@@ -20,7 +20,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="intro-open">
+  <div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Abrir invitación">
+    <div class="intro__sheet">
+      <img src="assets/portada.png" alt="" width="941" height="1672">
+      <p class="overlay cover-name gold-text" data-text="Mia">Mia</p>
+      <button class="intro__button" id="introButton" type="button">ABRIR INVITACIÓN</button>
+    </div>
+  </div>
+
   <main>
     <section class="sheet" aria-label="Portada de la invitación">
       <img src="assets/portada.png" alt="" width="941" height="1672">
